@@ -1,0 +1,16 @@
+{
+  "name": "local-nginx-test",
+  "scripts": {
+    "start": "node app.js",
+    "generate_key": "openssl req -x509 -days 365 -newkey rsa:2048 -keyout $(echo $(pwd)/ssl/nginx.key) -out $(echo $(pwd)/ssl/nginx.crt)",
+    "nginx:start": "sudo nginx -c $(echo $(pwd)/nginx.conf)",
+    "nginx:stop": "sudo nginx -s stop",
+    "nginx:reload": "sudo nginx -s reload",
+    "nginx:lint": "sudo nginx -t -c $(echo $(pwd)/nginx.conf)",
+    "nginx:build": "node build.js",
+    "build": "npm run nginx:build && npm run generate_key"
+  },
+  "devDependencies": {
+    "nunjucks": "^3.2.2"
+  }
+}
